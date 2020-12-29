@@ -13,6 +13,7 @@ import Section from './Section';
 import InboxIcon from '@material-ui/icons/Inbox';
 import PeopleIcon from '@material-ui/icons/People';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import EmailRow from './EmailRow';
 
 
 
@@ -65,7 +66,14 @@ function EmailList() {
                  color='green' 
                 />
             </div>
-            
+            <div className="emailList__list">
+                <EmailRow
+                title="Twitch"
+                subject="hey fellow streamer!!"
+                description="This is just a test This is just a test This is just a test  This is just a test"
+                time="10pm"
+                />
+            </div>
         </div>
     )
 }
