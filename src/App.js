@@ -10,9 +10,15 @@ import {
 } from "react-router-dom";
 import EmailList from './Components/EmailList';
 import Mail from './Components/Mail';
+import SendMail from './Components/SendMail';
+import { selectSendMessageIsOpen } from './features/mailSlice';
+import { useSelector } from 'react-redux';
 
 
 function App() {
+  const sendMessageIsOpen = useSelector(selectSendMessageIsOpen);
+
+
   return (
     <Router>
       <div className="app">
@@ -30,6 +36,9 @@ function App() {
             </Route>
           </Switch>
         </div>
+
+        { sendMessageIsOpen && <SendMail />}
+        
       </div>
     </Router>
   );
