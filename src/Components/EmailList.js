@@ -15,13 +15,16 @@ import PeopleIcon from '@material-ui/icons/People';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import EmailRow from './EmailRow';
 import { db } from '../firebase';
-
+import { coutTotalMail } from '../features/mailSlice';
+import { useDispatch } from 'react-redux';
 
 
 
 function EmailList() {
 
     const [emails, setEmails] = useState([]);
+    
+    const dispatch = useDispatch();
 
     useEffect(() => {
        db.collection('emails')
@@ -35,6 +38,13 @@ function EmailList() {
             )
         )
     }, [])
+    useEffect(()=> {
+        if(emails.length > 0){
+            dispatch(coutTotalMail(emails.length))
+        }
+    }, [emails])
+    
+   
 
     return (
         <div className='emailList'>
@@ -84,6 +94,7 @@ function EmailList() {
                 />
             </div>
             <div className="emailList__list">
+               
                 {emails.map(({id, data: {to, subject, message, timestamp} }) =>(
                     <EmailRow
                         id={id}
@@ -93,7 +104,10 @@ function EmailList() {
                         description={message}
                         time={new Date(timestamp?.seconds * 1000).toUTCString()}
                     />
-                ))}
+                   
+                )
+                )}
+                
             </div>
         </div>
     )
